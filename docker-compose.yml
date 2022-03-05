@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  database:
+    container_name: cda-db
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=cda-db'
+      - 'POSTGRES_USER=cda_user'
+      - 'POSTGRES_PASSWORD=cda_password'
+    ports:
+      - "5432:5432"
+    volumes:
+      - 'database-volume:/var/lib/postgresql/data'
+    networks:
+      - app-host
+    
+volumes:
+  database-volume:
+    
+networks:
+  app-host:
+    name: cda-network
