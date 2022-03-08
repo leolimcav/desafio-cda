@@ -1,12 +1,34 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace desafio_cda.api.Models;
 
-public class CriminalCode: AbstractModel
+[Table("criminalCodes")]
+public class CriminalCode
 {
-  public String Name { get; set; }
-  public String Description { get; set; }
-  public Decimal Penalty { get; set; }
+  [Key, Column(name:"id")]
+  public long Id { get; set; }
+  [Column(name:"name", TypeName = "varchar")]
+  public string Name { get; set; }
+  [Column(name:"description", TypeName = "varchar")]
+  public string Description { get; set; }
+  [Column(name:"penalty", TypeName = "numeric(5, 2)")]
+  public decimal Penalty { get; set; }
+  [Column(name:"prisonTime", TypeName = "integer")]
   public int PrisonTime { get; set; }
-  public Guid StatusId { get; set; }
-  public Guid CreateUserId { get; set; }
-  public Guid UpdateUserId { get; set; }
+  [ForeignKey(name:"statusId"), Column(name:"statusId")]
+  public long StatusId { get; set; }
+  public Status Status { get; set; }
+  [ForeignKey(name:"createUserId"), Column(name:"createUserId")]
+  public long CreateUserId { get; set; }
+  public User CreateUser { get; set; }
+  [ForeignKey(name:"updateUserId"), Column(name:"updateUserId")]
+  public long UpdateUserId { get; set; }
+  public User UpdateUser { get; set; }
+  [Column(name:"createdAt", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+  public DateTime CreatedAt { get; set; }
+  [Column(name:"updatedAt", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+  public DateTime UpdatedAt { get; set; }
 }
