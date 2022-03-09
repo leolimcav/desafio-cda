@@ -17,8 +17,8 @@ namespace desafio_cda.api.Migrations
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "varchar", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
+                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
+                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -33,8 +33,8 @@ namespace desafio_cda.api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     userName = table.Column<string>(type: "varchar", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
+                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
+                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -54,8 +54,8 @@ namespace desafio_cda.api.Migrations
                     statusId = table.Column<long>(type: "bigint", nullable: false),
                     createUserId = table.Column<long>(type: "bigint", nullable: false),
                     updateUserId = table.Column<long>(type: "bigint", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
+                    createdAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()"),
+                    updatedAt = table.Column<DateTime>(type: "timestamp", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {

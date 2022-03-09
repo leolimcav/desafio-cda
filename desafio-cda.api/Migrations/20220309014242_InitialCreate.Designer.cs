@@ -12,7 +12,7 @@ using desafio_cda.api.Repositories.Context;
 namespace desafio_cda.api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220308232011_InitialCreate")]
+    [Migration("20220309014242_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
-                        .HasColumnName("createdAt");
+                        .HasColumnName("createdAt")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -71,7 +72,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp")
-                        .HasColumnName("updatedAt");
+                        .HasColumnName("updatedAt")
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("Id");
 
@@ -96,7 +98,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
-                        .HasColumnName("createdAt");
+                        .HasColumnName("createdAt")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -106,7 +109,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp")
-                        .HasColumnName("updatedAt");
+                        .HasColumnName("updatedAt")
+                        .HasDefaultValueSql("now()");
 
                     b.HasKey("Id");
 
@@ -125,7 +129,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
-                        .HasColumnName("createdAt");
+                        .HasColumnName("createdAt")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -135,7 +140,8 @@ namespace desafio_cda.api.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp")
-                        .HasColumnName("updatedAt");
+                        .HasColumnName("updatedAt")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("UserName")
                         .IsRequired()
