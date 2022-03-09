@@ -5,7 +5,6 @@ using desafio_cda.api.Services.Implementations;
 using desafio_cda.api.Services.Interfaces;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.OpenApi.Models;
 
 using AppContext = desafio_cda.api.Repositories.Context.AppDbContext;
@@ -41,7 +40,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // app.MapSwagger();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
