@@ -28,9 +28,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
   options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnString"));
 });
+builder.Services.AddLogging();
 
 builder.Services.AddTransient<ICriminalCodeRepository, CriminalCodeRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
 builder.Services.AddTransient<ICriminalCodeService, CriminalCodeService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 

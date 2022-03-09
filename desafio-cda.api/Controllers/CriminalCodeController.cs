@@ -16,10 +16,11 @@ public class CriminalCodeController : BaseController
     this._criminalCodeService = criminalCodeService;
   }
 
-  [HttpPost]
-  [Route("/")]
-  public async Task<CreateCriminalCodeViewModel> Create([FromBody] CreateCriminalCodeDTO dto)
+  [HttpPost()]
+  public async Task<ActionResult<CreateCriminalCodeViewModel>> Create([FromBody] CreateCriminalCodeDTO dto)
   {
-    return await _criminalCodeService.CreateAsync(dto);
+    var createdCriminalCode = await _criminalCodeService.CreateAsync(dto);
+
+    return Created("", createdCriminalCode);
   }
 }
