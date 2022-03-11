@@ -11,12 +11,42 @@ public class CriminalCodeService : ICriminalCodeService
   
   public CriminalCodeService(ICriminalCodeRepository criminalCodeRepository)
   {
-    this._criminalCodeRepository = criminalCodeRepository;
+    _criminalCodeRepository = criminalCodeRepository;
   }
-  public async Task<CreateCriminalCodeViewModel> CreateAsync(CreateCriminalCodeDTO dto)
-  {
-    var result = await this._criminalCodeRepository.Save(dto);
 
-    return new CreateCriminalCodeViewModel();
+  public async Task<IEnumerable<CriminalCodeViewModel>> GetAllAsync(string? orderBy, FilterCriminalCode filters, PaginationFilter paginationFilter)
+  {
+    var criminalCodes = await _criminalCodeRepository.GetAllAsync(orderBy, filters, paginationFilter);
+
+    var criminalCodeViewModelEnumerable = criminalCodes.Select(CriminalCodeViewModel.ModelToViewModel); 
+    return criminalCodeViewModelEnumerable;
+  }
+
+  public async Task<CriminalCodeViewModel?> GetByIdAsync(long id)
+  {
+    var criminalCode = await _criminalCodeRepository.GetByIdAsync(id);
+    
+    return criminalCode is null ?  null : CriminalCodeViewModel.ModelToViewModel(criminalCode);
+  }
+
+  public async Task<CriminalCodeViewModel?> CreateAsync(CreateCriminalCodeDTO dto)
+  {
+    var createdCriminalCode = await this._criminalCodeRepository.SaveAsync(dto);
+
+    return createdCriminalCode is null ? null : CriminalCodeViewModel.ModelToViewModel(createdCriminalCode);
+  }
+
+  public async Task<CriminalCodeViewModel?> UpdateAsync(long id, UpdateCriminalCodeDTO dto)
+  {
+    var updatedCriminalCode = await _criminalCodeRepository.UpdateAsync(id, dto);
+    
+    return updatedCriminalCode is null ? null : CriminalCodeViewModel.ModelToViewModel(updatedCriminalCode);
+  }
+
+  public async Task<CriminalCodeViewModel?> RemoveAsync(long id)
+  {
+    var deletedCriminalCode = await _criminalCodeRepository.RemoveAsync(id);
+    
+    return deletedCriminalCode is null ? null : CriminalCodeViewModel.ModelToViewModel(deletedCriminalCode);
   }
 }

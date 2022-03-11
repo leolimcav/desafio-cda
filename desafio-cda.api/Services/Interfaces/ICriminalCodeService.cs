@@ -5,5 +5,9 @@ namespace desafio_cda.api.Services.Interfaces;
 
 public interface ICriminalCodeService
 {
-  Task<CreateCriminalCodeViewModel> CreateAsync(CreateCriminalCodeDTO dto);
+  Task<IEnumerable<CriminalCodeViewModel>> GetAllAsync(string? orderBy, FilterCriminalCode filters, PaginationFilter paginationFilter);
+  Task<CriminalCodeViewModel?> GetByIdAsync(long id);
+  Task<CriminalCodeViewModel?> CreateAsync(CreateCriminalCodeDTO dto);
+  Task<CriminalCodeViewModel?> UpdateAsync(long id, UpdateCriminalCodeDTO dto);
+  Task<CriminalCodeViewModel?> RemoveAsync(long id);
 }

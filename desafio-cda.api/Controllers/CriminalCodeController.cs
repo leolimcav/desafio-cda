@@ -13,14 +13,45 @@ public class CriminalCodeController : BaseController
   
   public CriminalCodeController(ICriminalCodeService criminalCodeService)
   {
-    this._criminalCodeService = criminalCodeService;
+    _criminalCodeService = criminalCodeService;
   }
 
-  [HttpPost()]
-  public async Task<ActionResult<CreateCriminalCodeViewModel>> Create([FromBody] CreateCriminalCodeDTO dto)
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<CriminalCodeViewModel>>> GetAll([FromQuery] string? orderBy, [FromQuery] FilterCriminalCode filters, [FromQuery] PaginationFilter paginationFilter)
+  {
+    return Ok(await _criminalCodeService.GetAllAsync(orderBy, filters, paginationFilter));
+  }
+
+  [HttpGet("{id}")]
+  public async Task<ActionResult<CriminalCodeViewModel>> GetById([FromRoute] long id)
+  {
+    var criminalCode = await _criminalCodeService.GetByIdAsync(id);
+
+    return criminalCode is null ? NotFound("Criminal Code Not Found!") : Ok(criminalCode);
+  }
+  
+  [HttpPost]
+  public async Task<ActionResult<CriminalCodeViewModel>> Create([FromBody] CreateCriminalCodeDTO dto)
   {
     var createdCriminalCode = await _criminalCodeService.CreateAsync(dto);
 
-    return Created("", createdCriminalCode);
+    return createdCriminalCode is null ? BadRequest("Criminal Code with this name already exists!") : Created("", createdCriminalCode);
+  }
+
+  [HttpPut("{id}")]
+  public async Task<ActionResult<CriminalCodeViewModel>> Update([FromRoute] long id,
+    [FromBody] UpdateCriminalCodeDTO dto)
+  {
+    var updatedCriminalCode = await _criminalCodeService.UpdateAsync(id, dto);
+
+    return updatedCriminalCode is null ? NotFound("Criminal Code Not Found!") : Ok(updatedCriminalCode);
+  }
+
+  [HttpDelete("{id}")]
+  public async Task<ActionResult<CriminalCodeViewModel>> Remove([FromRoute] long id)
+  {
+    var deletedCriminalCode = await _criminalCodeService.RemoveAsync(id);
+    
+    return deletedCriminalCode is null ? NotFound("Criminal Code Not Found!") : Ok(deletedCriminalCode);
   }
 }

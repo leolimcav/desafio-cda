@@ -30,9 +30,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddLogging();
 
 builder.Services.AddTransient<ICriminalCodeRepository, CriminalCodeRepository>();
+builder.Services.AddTransient<IStatusRepository, StatusRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 builder.Services.AddTransient<ICriminalCodeService, CriminalCodeService>();
+builder.Services.AddTransient<IStatusService, StatusService>();
 builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
