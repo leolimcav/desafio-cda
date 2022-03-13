@@ -5,5 +5,6 @@ namespace desafio_cda.api.Repositories.Interfaces;
 
 public interface IUserRepository
 {
-  Task<User> SaveAsync(CreateUserDTO entity);
+  Task<User?> GetByUsername(string userName);
+  Task<User?> SaveAsync(CreateUserDTO entity);
 }

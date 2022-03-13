@@ -5,6 +5,8 @@ using desafio_cda.api.Repositories.Interfaces;
 
 using desafio_cda.api.Utils;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace desafio_cda.api.Repositories.Implementations;
 
 public class UserRepository : IUserRepository
@@ -15,7 +17,14 @@ public class UserRepository : IUserRepository
   {
     _context = context;
   }
-  
+
+  public async Task<User?> GetByUsername(string userName)
+  {
+    var user = await _context.Users.Where(x => x.UserName == userName).FirstOrDefaultAsync();
+
+    return user;
+  }
+
   public async Task<User> SaveAsync(CreateUserDTO entity)
   {
     var createdUser = _context.Users.Add(new User

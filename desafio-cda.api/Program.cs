@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(config =>
 {
-  config.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1", Description = "My API Swagger" });
+  config.SwaggerDoc("v1", new OpenApiInfo { Title = "CriminalCode API", Version = "v1", Description = "API To Manage Cidade Alta Criminal Codes" });
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
